@@ -11,12 +11,13 @@
 ## Objetivo
 
 Este projeto tem como objetivo a criação e configuração de uma máquina virtual utilizando o Vagrant, de forma que a instalação e a configuração de serviços de rede sejam realizadas automaticamente. O intuito é que o usuário execute apenas um comando para iniciar a VM e, após isso, possa realizar os testes dos serviços configurados, conforme descrito neste guia.
-###Serviços Configurados:
 
-    DHCP: Instalação e configuração de um servidor DHCP para fornecimento automático de IPs.
-    DNS (BIND9): Implementação de um servidor DNS para resolução de nomes de domínio.
-    FTP (ProFTPD): Instalação e configuração de um servidor FTP para compartilhamento de arquivos.
-    NFS: Configuração de um servidor NFS para o compartilhamento de diretórios.
+### Serviços Configurados:
+
+   1. DHCP: Instalação e configuração de um servidor DHCP para fornecimento automático de IPs.
+   2. DNS (BIND9): Implementação de um servidor DNS para resolução de nomes de domínio.
+   3. FTP (ProFTPD): Instalação e configuração de um servidor FTP para compartilhamento de arquivos.
+   4. NFS: Configuração de um servidor NFS para o compartilhamento de diretórios.
 
 Neste documento, você encontrará instruções detalhadas sobre o ambiente, como subir a máquina virtual e testar cada serviço configurado.
 
