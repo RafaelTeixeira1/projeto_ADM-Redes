@@ -6,82 +6,90 @@ Administração de Redes de Computadores
     Alunos: Jhannyfer S. R. Biângulo e Rafael de Souza Teixeira
     Professor: Roitier Gonçalves
 
-Objetivo
+Projeto de Configuração Automática de Serviços com Vagrant
 
-Este trabalho visa a criação e configuração de duas máquinas virtuais (VMs) utilizando o Vagrant, automatizando a implementação de serviços de rede. O objetivo é que o usuário apenas execute os comandos necessários para inicializar as VMs e, em seguida, realize os testes de cada serviço conforme descrito neste guia.
+# Objetivo
 
-    Server: Configurado para fornecer os serviços DHCP, DNS, FTP, Samba, NFS e Nginx.
-    Client: Configurado para obter IP via DHCP, utilizar o DNS configurado no servidor e acessar os serviços FTP, Samba, NFS e Nginx.
+Este projeto tem como objetivo a criação e configuração de uma máquina virtual utilizando o Vagrant, de forma que a instalação e a configuração de serviços de rede sejam realizadas automaticamente. O intuito é que o usuário execute apenas um comando para iniciar a VM e, após isso, possa realizar os testes dos serviços configurados, conforme descrito neste guia.
+Serviços Configurados:
 
-Este documento apresenta uma explicação detalhada do ambiente, orientações para subir as máquinas virtuais e instruções de teste de cada serviço configurado.
+    DHCP: Instalação e configuração de um servidor DHCP para fornecimento automático de IPs.
+    DNS (BIND9): Implementação de um servidor DNS para resolução de nomes de domínio.
+    FTP (ProFTPD): Instalação e configuração de um servidor FTP para compartilhamento de arquivos.
+    NFS: Configuração de um servidor NFS para o compartilhamento de diretórios.
+
+Neste documento, você encontrará instruções detalhadas sobre o ambiente, como subir a máquina virtual e testar cada serviço configurado.
 Preparação do Ambiente
+Requisitos:
 
-Pré-requisitos:
+Certifique-se de que o Vagrant e o VirtualBox estão instalados corretamente em sua máquina:
 
-    Certifique-se de que o Vagrant e o VirtualBox estão instalados em seu sistema.
-        Para instalar o Vagrant: https://www.vagrantup.com/downloads
-        Para instalar o VirtualBox: https://www.virtualbox.org/
-        Recomendação: Utilize a versão 6.1 do VirtualBox para maior compatibilidade.
+    Para instalar o Vagrant: Vagrant Downloads
+    Para instalar o VirtualBox: VirtualBox Downloads
 
-Verificação da Instalação:
+Recomendação: Utilize a versão 6.1 do VirtualBox para melhor compatibilidade.
+Verificando a Instalação:
 
-    Verifique se os softwares estão instalados corretamente:
+Certifique-se de que os programas estão funcionando corretamente com os seguintes comandos:
 
-    vagrant --version
-    vboxmanage --version
+vagrant --version
+vboxmanage --version
 
-Preparar o Ambiente:
+Configurando o Ambiente:
 
-    Crie um diretório para o projeto:
+    Crie um novo diretório para o projeto:
 
-    mkdir meu_projeto
-    cd meu_projeto
+    mkdir vagrant_config_dhcp_dns_ftp_nfs
+    cd vagrant_config_dhcp_dns_ftp_nfs
 
-    Substitua o arquivo Vagrantfile pelo arquivo fornecido neste guia.
+    Substitua o arquivo Vagrantfile:
+        Coloque o arquivo Vagrantfile que você recebeu neste diretório.
 
-Iniciar as VMs:
+Subindo a VM:
 
-    No terminal, execute o comando abaixo para iniciar e configurar as máquinas virtuais automaticamente:
+No terminal, execute o seguinte comando para iniciar e configurar a máquina virtual automaticamente:
 
-    vagrant up
+vagrant up
 
-        Após este comando, as máquinas serão provisionadas com todos os serviços configurados automaticamente. Não é necessário executar comandos manuais dentro das VMs.
-
+Após esse comando, a máquina será configurada com todos os serviços necessários de forma automática. Não será necessário rodar comandos manuais dentro da VM.
 Testando os Serviços
 
-Após a inicialização das VMs, siga as etapas abaixo para verificar o funcionamento de cada serviço:
+Depois de inicializar a máquina, siga os passos abaixo para testar o funcionamento de cada serviço:
 Serviço DHCP
+
 No cliente:
 
-    Verifique se um IP foi atribuído automaticamente:
+    Verifique se o IP foi atribuído automaticamente:
 
     ip addr show
 
-        O cliente deve receber um IP na faixa 192.168.56.10-192.168.56.100.
+    O cliente deverá receber um IP na faixa 192.168.X.10-192.168.X.200.
 
 Serviço DNS (BIND9)
+
 No cliente:
 
-    Teste a resolução de nomes configurada no servidor DNS:
+    Verifique se a resolução de nomes configurada no servidor DNS está funcionando:
 
-    dig example.local
+    dig roitier.com.br
 
-        O nome example.local deve ser resolvido com sucesso.
+    O nome roitier.com.br deve ser resolvido corretamente.
 
 Serviço FTP
+
 No cliente:
 
-    Conecte ao servidor FTP e liste os arquivos disponíveis:
+    Acesse o servidor FTP e liste os arquivos disponíveis:
 
-    ftp 192.168.56.1
+    ftp 192.168.X.1
 
-        Use o usuário anonymous durante o login. Você deverá visualizar o arquivo README.txt no diretório compartilhado.
+    Use o login anonymous. O arquivo README.txt deve estar visível no diretório compartilhado.
 
 Serviço NFS
 
 No servidor:
 
-    Verifique o status do serviço NFS:
+    Verifique se o serviço NFS está ativo:
 
     systemctl status nfs-kernel-server
 
@@ -89,82 +97,32 @@ No cliente:
 
     Monte o diretório compartilhado pelo servidor NFS:
 
-    sudo mount 192.168.56.1:/srv/nfs_share /mnt
+sudo mount 192.168.X.1:/home/storage /mnt
 
-Após montar, crie um arquivo no diretório compartilhado:
+Crie um arquivo no diretório compartilhado:
 
-echo "Arquivo criado pelo cliente" | sudo tee /mnt/nfs_share/teste_cliente.txt
+    echo "Arquivo criado pelo cliente" | sudo tee /mnt/teste_cliente.txt
 
 No servidor:
 
-    Verifique se o arquivo criado no cliente está disponível no servidor:
+    Verifique se o arquivo criado no cliente está visível no servidor:
 
-    ls /srv/nfs_share
+    ls /home/storage
 
-        O arquivo teste_cliente.txt deve aparecer na listagem.
+    O arquivo teste_cliente.txt deverá aparecer.
 
-Serviço Nginx
-
-No cliente:
-
-    Teste o acesso ao site estático servido pelo Nginx:
-
-    curl http://192.168.56.1
-
-    A página deve exibir a mensagem "Bem-vindo ao Site Estático!". Você também pode acessar o site via navegador utilizando o IP do servidor.
-
-Verificação e Correção Manual (Caso Necessário):
-
-    Se você já aplicou o Vagrantfile corrigido, mas ainda está enfrentando problemas com o Nginx, siga os passos abaixo para corrigir manualmente:
-
-    Acesse a VM Server:
-
-    vagrant ssh server
-
-Verifique a Configuração do Nginx:
-
-    Abra o arquivo de configuração do site:
-
-    sudo nano /etc/nginx/sites-available/site
-
-Certifique-se de que o conteúdo está conforme o modelo abaixo:
-
-server {
-    listen 80 default_server;
-    server_name _;
-
-    root /var/www/html/site;
-    index index.html;
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-}
-
-Teste a Configuração do Nginx:
-
-sudo nginx -t
-
-    Se houver erros, revise as mensagens exibidas para corrigir quaisquer problemas.
-
-Reinicie o Nginx:
-
-sudo systemctl restart nginx
-
-Referências e Documentações
+Referências e Documentação
 
     Documentação do Vagrant
     Documentação do ISC-DHCP-Server
     Documentação do BIND9
-    Documentação do FTP (vsftpd)
-    Documentação do Samba
+    Documentação do ProFTPD
     Documentação do NFS
-    Documentação do Nginx
 
 Conclusão
 
-Com o arquivo Vagrantfile fornecido, todo o processo de configuração é realizado automaticamente, permitindo que o usuário foque apenas nos testes de cada serviço. O provisionamento automatizado facilita a criação do ambiente, garantindo consistência e praticidade.
+Com o Vagrantfile fornecido, todo o processo de configuração é feito automaticamente, permitindo que o usuário se concentre apenas em testar os serviços configurados. A automação na configuração do ambiente garante consistência e facilita o processo.
 
-Caso algum serviço não funcione corretamente, revise as configurações e logs correspondentes em cada máquina virtual. Utilize as referências para aprofundar o entendimento e solucionar eventuais problemas.
+Se algum serviço não funcionar como esperado, confira as configurações e logs em cada máquina virtual. Consulte as documentações e referências indicadas para mais informações e resolução de problemas.
 
-Este guia demonstrou como implementar e testar os principais serviços de rede utilizando ferramentas modernas como o Vagrant, promovendo um aprendizado prático e eficaz sobre administração de redes.
+Este guia apresentou como implementar e testar serviços de rede fundamentais utilizando o Vagrant, proporcionando uma experiência prática no gerenciamento de redes.
