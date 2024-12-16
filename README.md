@@ -193,6 +193,7 @@ No servidor:
 [Documentação do BIND9](https://bind9.readthedocs.io/en/latest/)  
 [Documentação do ProFTPD](http://www.proftpd.org/docs/)  
 [Documentação do NFS](https://wiki.linux-nfs.org/wiki/index.php/Main_Page)  
+[Documentação do Samba](https://www.samba.org/samba/docs/)
 
 ## Conclusão
 
