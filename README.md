@@ -119,11 +119,11 @@ O arquivo teste_cliente.txt deverá aparecer.
 
 ## Referências e Documentação
 
-[Documentação do Vagrant](https://developer.hashicorp.com/vagrant/docs)
-[Documentação do ISC-DHCP-Server](https://manpages.ubuntu.com/manpages/bionic/en/man8/dhcpd.8.html)
-[Documentação do BIND9](https://bind9.readthedocs.io/en/latest/)
-[Documentação do ProFTPD](http://www.proftpd.org/docs/)
-[Documentação do NFS](https://wiki.linux-nfs.org/wiki/index.php/Main_Page)
+[Documentação do Vagrant](https://developer.hashicorp.com/vagrant/docs)  
+[Documentação do ISC-DHCP-Server](https://manpages.ubuntu.com/manpages/bionic/en/man8/dhcpd.8.html)  
+[Documentação do BIND9](https://bind9.readthedocs.io/en/latest/)  
+[Documentação do ProFTPD](http://www.proftpd.org/docs/)  
+[Documentação do NFS](https://wiki.linux-nfs.org/wiki/index.php/Main_Page)  
 
 ## Conclusão
 
