@@ -36,8 +36,8 @@ Recomendação: Utilize a versão 6.1 do VirtualBox para melhor compatibilidade.
 
 Certifique-se de que os programas estão funcionando corretamente com os seguintes comandos:
 
-vagrant --version
-vboxmanage --version
+`vagrant --version
+vboxmanage --version`
 
 ### Configurando o Ambiente:
 
