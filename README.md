@@ -1,10 +1,10 @@
 # Administração de Redes de Computadores
 
-*Instituição: IF Goiano - Campus Ceres
-*Curso: Bacharelado em Sistemas de Informação
-*Disciplina: Administração de Redes de Computadores
-*Alunos: Jhannyfer S. R. Biângulo e Rafael de Souza Teixeira
-*Professor: Roitier Gonçalves
+Instituição: IF Goiano - Campus Ceres
+Curso: Bacharelado em Sistemas de Informação
+Disciplina: Administração de Redes de Computadores
+Alunos: Jhannyfer S. R. Biângulo e Rafael de Souza Teixeira
+Professor: Roitier Gonçalves
 
 # Projeto de Configuração Automática de Serviços com Vagrant
 
