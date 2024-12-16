@@ -1,10 +1,10 @@
 # Administração de Redes de Computadores
 
-Instituição: IF Goiano - Campus Ceres
-Curso: Bacharelado em Sistemas de Informação
-Disciplina: Administração de Redes de Computadores
-Alunos: Jhannyfer S. R. Biângulo e Rafael de Souza Teixeira
-Professor: Roitier Gonçalves
+*Instituição: IF Goiano - Campus Ceres*  
+*Curso: Bacharelado em Sistemas de Informação*  
+*Disciplina: Administração de Redes de Computadores*  
+*Alunos: Jhannyfer S. R. Biângulo e Rafael de Souza Teixeira*   
+*Professor: Roitier Gonçalves*  
 
 # Projeto de Configuração Automática de Serviços com Vagrant
 
@@ -27,8 +27,8 @@ Neste documento, você encontrará instruções detalhadas sobre o ambiente, com
 
 Certifique-se de que o Vagrant e o VirtualBox estão instalados corretamente em sua máquina:
 
-    Para instalar o Vagrant: Vagrant Downloads
-    Para instalar o VirtualBox: VirtualBox Downloads
+  Para instalar o Vagrant: [Vagrant Downloads](https://www.vagrantup.com/downloads)  
+  Para instalar o VirtualBox: [VirtualBox Downloads](https://www.virtualbox.org/)
 
 Recomendação: Utilize a versão 6.1 do VirtualBox para melhor compatibilidade.
 
@@ -69,7 +69,7 @@ Verifique se o IP foi atribuído automaticamente:
 
     ip addr show
 
-O cliente deverá receber um IP na faixa 192.168.X.10-192.168.X.200.
+O cliente deverá receber um IP na faixa 192.168.10.10-192.168.10.200.
 
 ### Serviço DNS (BIND9)
 
@@ -87,7 +87,7 @@ No cliente:
 
 Acesse o servidor FTP e liste os arquivos disponíveis:
 
-    ftp 192.168.X.1
+    ftp 192.168.10.1
 
 Use o login anonymous. O arquivo README.txt deve estar visível no diretório compartilhado.
 
@@ -103,7 +103,7 @@ No cliente:
 
 Monte o diretório compartilhado pelo servidor NFS:
 
-    sudo mount 192.168.X.1:/home/storage /mnt
+    sudo mount 192.168.10.1:/home/storage /mnt
 
 Crie um arquivo no diretório compartilhado:
 
