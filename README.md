@@ -14,10 +14,10 @@ Este projeto tem como objetivo a criação e configuração de uma máquina virt
 
 ### Serviços Configurados:
 
-   1. DHCP: Instalação e configuração de um servidor DHCP para fornecimento automático de IPs.
-   2. DNS (BIND9): Implementação de um servidor DNS para resolução de nomes de domínio.
-   3. FTP (ProFTPD): Instalação e configuração de um servidor FTP para compartilhamento de arquivos.
-   4. NFS: Configuração de um servidor NFS para o compartilhamento de diretórios.
+   * DHCP: Instalação e configuração de um servidor DHCP para fornecimento automático de IPs.
+   * DNS (BIND9): Implementação de um servidor DNS para resolução de nomes de domínio.
+   * FTP (ProFTPD): Instalação e configuração de um servidor FTP para compartilhamento de arquivos.
+   * NFS: Configuração de um servidor NFS para o compartilhamento de diretórios.
 
 Neste documento, você encontrará instruções detalhadas sobre o ambiente, como subir a máquina virtual e testar cada serviço configurado.
 
