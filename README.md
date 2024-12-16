@@ -118,6 +118,74 @@ No servidor:
 
 O arquivo teste_cliente.txt deverá aparecer.
 
+### Serviço Samba
+
+No servidor:
+
+1. **Instale os pacotes necessários do Samba:**
+
+        apt -y install o libcups2 samba-common cups
+
+2. **Movendo o arquivo de configuração do Samba:**
+
+       mv /etc/samba/smb.conf /etc/samba/smb.conf.bkp
+
+3. **Crie o novo arquivo de configuração do Samba:**
+
+        nano /etc/samba/smb.conf
+
+     E adicione o seguinte conteúdo:
+
+        [global]
+        workgroup = WORKGROUP
+        server string = Samba Server %v
+        netbios name = debian
+        security = user
+        map to guest = bad user
+        dns proxy = no
+
+  Substitua WORKGROUP pelo nome do grupo de trabalho utilizado nos clientes Windows.
+
+4. **Reinicie o Samba:**
+
+        systemctl restart smbd.service
+
+5. **Crie o diretório para compartilhamento de arquivos e altere as permissões:**
+
+        mkdir -p /home/shares/allusers
+        chown -R root:users /home/shares/allusers/
+        chmod -R ug+rwx,o+rx-w /home/shares/allusers/
+        mkdir -p /home/shares/anonymous
+        chown -R root:users /home/shares/anonymous/
+        chmod -R ug+rwx,o+rx-w /home/shares/anonymous/
+
+6. **Adicione a configuração do compartilhamento no final do arquivo smb.conf:**
+
+        nano /etc/samba/smb.conf
+
+    E adicione o seguinte bloco:
+
+        [allusers]
+        comment = All Users
+        path = /home/shares/allusers
+        valid users = @users
+        force group = users
+        create mask = 0660
+        directory mask = 0771
+        writable = yes
+
+7. **Reinicie o Samba novamente:**
+
+        systemctl restart smbd.service
+
+8. **Adicione um novo usuário Samba:**
+
+        useradd tom -m -G users
+        passwd tom
+        smbpasswd -a tom
+
+    Agora o usuário tom pode acessar os compartilhamentos Samba.
+
 ## Referências e Documentação
 
 [Documentação do Vagrant](https://developer.hashicorp.com/vagrant/docs)  
