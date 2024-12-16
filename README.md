@@ -43,8 +43,8 @@ vboxmanage --version`
 
 Crie um novo diretório para o projeto:
 
-    `mkdir vagrant_config_dhcp_dns_ftp_nfs
-    cd vagrant_config_dhcp_dns_ftp_nfs`
+    mkdir vagrant_config_dhcp_dns_ftp_nfs
+    cd vagrant_config_dhcp_dns_ftp_nfs
 
  Substitua o arquivo Vagrantfile:
         Coloque o arquivo Vagrantfile que você recebeu neste diretório.
