@@ -1,4 +1,4 @@
-#Administração de Redes de Computadores
+# Administração de Redes de Computadores
 
     Instituição: IF Goiano - Campus Ceres
     Curso: Bacharelado em Sistemas de Informação
@@ -6,7 +6,7 @@
     Alunos: Jhannyfer S. R. Biângulo e Rafael de Souza Teixeira
     Professor: Roitier Gonçalves
 
-#Projeto de Configuração Automática de Serviços com Vagrant
+# Projeto de Configuração Automática de Serviços com Vagrant
 
 ## Objetivo
 
@@ -20,9 +20,9 @@ Este projeto tem como objetivo a criação e configuração de uma máquina virt
 
 Neste documento, você encontrará instruções detalhadas sobre o ambiente, como subir a máquina virtual e testar cada serviço configurado.
 
-##Preparação do Ambiente
+## Preparação do Ambiente
 
-###Requisitos:
+### Requisitos:
 
 Certifique-se de que o Vagrant e o VirtualBox estão instalados corretamente em sua máquina:
 
@@ -31,14 +31,14 @@ Certifique-se de que o Vagrant e o VirtualBox estão instalados corretamente em 
 
 Recomendação: Utilize a versão 6.1 do VirtualBox para melhor compatibilidade.
 
-###Verificando a Instalação:
+### Verificando a Instalação:
 
 Certifique-se de que os programas estão funcionando corretamente com os seguintes comandos:
 
 vagrant --version
 vboxmanage --version
 
-###Configurando o Ambiente:
+### Configurando o Ambiente:
 
     Crie um novo diretório para o projeto:
 
@@ -48,7 +48,7 @@ vboxmanage --version
     Substitua o arquivo Vagrantfile:
         Coloque o arquivo Vagrantfile que você recebeu neste diretório.
 
-###Subindo a VM:
+### Subindo a VM:
 
 No terminal, execute o seguinte comando para iniciar e configurar a máquina virtual automaticamente:
 
@@ -56,11 +56,11 @@ vagrant up
 
 Após esse comando, a máquina será configurada com todos os serviços necessários de forma automática. Não será necessário rodar comandos manuais dentro da VM.
 
-###Testando os Serviços
+### Testando os Serviços
 
 Depois de inicializar a máquina, siga os passos abaixo para testar o funcionamento de cada serviço:
 
-###Serviço DHCP
+### Serviço DHCP
 
 No cliente:
 
@@ -70,7 +70,7 @@ No cliente:
 
     O cliente deverá receber um IP na faixa 192.168.X.10-192.168.X.200.
 
-###Serviço DNS (BIND9)
+### Serviço DNS (BIND9)
 
 No cliente:
 
@@ -80,7 +80,7 @@ No cliente:
 
     O nome roitier.com.br deve ser resolvido corretamente.
 
-###Serviço FTP
+### Serviço FTP
 
 No cliente:
 
@@ -90,7 +90,7 @@ No cliente:
 
     Use o login anonymous. O arquivo README.txt deve estar visível no diretório compartilhado.
 
-###Serviço NFS
+### Serviço NFS
 
 No servidor:
 
@@ -116,7 +116,7 @@ No servidor:
 
     O arquivo teste_cliente.txt deverá aparecer.
 
-##Referências e Documentação
+## Referências e Documentação
 
     Documentação do Vagrant
     Documentação do ISC-DHCP-Server
@@ -124,7 +124,7 @@ No servidor:
     Documentação do ProFTPD
     Documentação do NFS
 
-##Conclusão
+## Conclusão
 
 Com o Vagrantfile fornecido, todo o processo de configuração é feito automaticamente, permitindo que o usuário se concentre apenas em testar os serviços configurados. A automação na configuração do ambiente garante consistência e facilita o processo.
 
