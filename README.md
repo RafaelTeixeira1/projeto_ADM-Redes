@@ -53,7 +53,7 @@ Crie um novo diretório para o projeto:
 
 No terminal, execute o seguinte comando para iniciar e configurar a máquina virtual automaticamente:
 
-vagrant up
+`vagrant up`
 
 Após esse comando, a máquina será configurada com todos os serviços necessários de forma automática. Não será necessário rodar comandos manuais dentro da VM.
 
