@@ -14,10 +14,11 @@ Este projeto tem como objetivo a criação e configuração de uma máquina virt
 
 ### Serviços Configurados:
 
-   * DHCP: Instalação e configuração de um servidor DHCP para fornecimento automático de IPs.
-   * DNS (BIND9): Implementação de um servidor DNS para resolução de nomes de domínio.
-   * FTP (ProFTPD): Instalação e configuração de um servidor FTP para compartilhamento de arquivos.
-   * NFS: Configuração de um servidor NFS para o compartilhamento de diretórios.
+   * **DHCP:** Instalação e configuração de um servidor DHCP para fornecimento automático de IPs.
+   * **DNS (BIND9):** Implementação de um servidor DNS para resolução de nomes de domínio.
+   * **FTP (ProFTPD):** Instalação e configuração de um servidor FTP para compartilhamento de arquivos.
+   * **NFS:** Configuração de um servidor NFS para o compartilhamento de diretórios.
+   * **Samba:** Instalação e configuração de um servidor Samba para compartilhamento de arquivos entre sistemas Windows e Linux.
 
 Neste documento, você encontrará instruções detalhadas sobre o ambiente, como subir a máquina virtual e testar cada serviço configurado.
 
@@ -43,8 +44,8 @@ Neste documento, você encontrará instruções detalhadas sobre o ambiente, com
 
 * Crie um novo diretório para o projeto:
 
-      mkdir vagrant_config_dhcp_dns_ftp_nfs
-      cd vagrant_config_dhcp_dns_ftp_nfs
+      mkdir vagrant_services
+      cd vagrant_servoces
 
  Substitua o arquivo Vagrantfile:
         Coloque o arquivo Vagrantfile que você recebeu neste diretório.
