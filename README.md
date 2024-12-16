@@ -25,59 +25,59 @@ Neste documento, você encontrará instruções detalhadas sobre o ambiente, com
 
 ### Requisitos:
 
-Certifique-se de que o Vagrant e o VirtualBox estão instalados corretamente em sua máquina:
+* Certifique-se de que o Vagrant e o VirtualBox estão instalados corretamente em sua máquina:
 
   Para instalar o Vagrant: [Vagrant Downloads](https://www.vagrantup.com/downloads)  
   Para instalar o VirtualBox: [VirtualBox Downloads](https://www.virtualbox.org/)
 
-Recomendação: Utilize a versão 6.1 do VirtualBox para melhor compatibilidade.
+  **Recomendação:** Utilize a versão 6.1 do VirtualBox para melhor compatibilidade.
 
 ### Verificando a Instalação:
 
-Certifique-se de que os programas estão funcionando corretamente com os seguintes comandos:
+* Certifique-se de que os programas estão funcionando corretamente com os seguintes comandos:
 
-    vagrant --version
-    vboxmanage --version
+      vagrant --version
+      vboxmanage --version
 
 ### Configurando o Ambiente:
 
-Crie um novo diretório para o projeto:
+* Crie um novo diretório para o projeto:
 
-    mkdir vagrant_config_dhcp_dns_ftp_nfs
-    cd vagrant_config_dhcp_dns_ftp_nfs
+      mkdir vagrant_config_dhcp_dns_ftp_nfs
+      cd vagrant_config_dhcp_dns_ftp_nfs
 
  Substitua o arquivo Vagrantfile:
         Coloque o arquivo Vagrantfile que você recebeu neste diretório.
 
 ### Subindo a VM:
 
-No terminal, execute o seguinte comando para iniciar e configurar a máquina virtual automaticamente:
+* No terminal, execute o seguinte comando para iniciar e configurar a máquina virtual automaticamente:
 
-    vagrant up
+      vagrant up
 
-Após esse comando, a máquina será configurada com todos os serviços necessários de forma automática. Não será necessário rodar comandos manuais dentro da VM.
+* Após esse comando, a máquina será configurada com todos os serviços necessários de forma automática. Não será necessário rodar comandos manuais dentro da VM.
 
 ### Testando os Serviços
 
-Depois de inicializar a máquina, siga os passos abaixo para testar o funcionamento de cada serviço:
+* Depois de inicializar a máquina, siga os passos abaixo para testar o funcionamento de cada serviço:
 
 ### Serviço DHCP
 
 No cliente:
 
-Verifique se o IP foi atribuído automaticamente:
+* Verifique se o IP foi atribuído automaticamente:
 
-    ip addr show
+      ip addr show
 
-O cliente deverá receber um IP na faixa 192.168.10.10-192.168.10.200.
+* O cliente deverá receber um IP na faixa 192.168.10.10-192.168.10.200.
 
 ### Serviço DNS (BIND9)
 
 No cliente:
 
-Verifique se a resolução de nomes configurada no servidor DNS está funcionando:
+* Verifique se a resolução de nomes configurada no servidor DNS está funcionando:
 
-    dig roitier.com.br
+      dig roitier.com.br
 
 O nome roitier.com.br deve ser resolvido corretamente.
 
@@ -85,35 +85,35 @@ O nome roitier.com.br deve ser resolvido corretamente.
 
 No cliente:
 
-Acesse o servidor FTP e liste os arquivos disponíveis:
+* Acesse o servidor FTP e liste os arquivos disponíveis:
 
-    ftp 192.168.10.1
+      ftp 192.168.10.1
 
-Use o login anonymous. O arquivo README.txt deve estar visível no diretório compartilhado.
+* Use o login anonymous. O arquivo README.txt deve estar visível no diretório compartilhado.
 
 ### Serviço NFS
 
 No servidor:
 
- Verifique se o serviço NFS está ativo:
+* Verifique se o serviço NFS está ativo:
 
-    systemctl status nfs-kernel-server
+      systemctl status nfs-kernel-server
 
 No cliente:
 
-Monte o diretório compartilhado pelo servidor NFS:
+* Monte o diretório compartilhado pelo servidor NFS:
 
-    sudo mount 192.168.10.1:/home/storage /mnt
+      sudo mount 192.168.10.1:/home/storage /mnt
 
-Crie um arquivo no diretório compartilhado:
+* Crie um arquivo no diretório compartilhado:
 
-    echo "Arquivo criado pelo cliente" | sudo tee /mnt/teste_cliente.txt
+      echo "Arquivo criado pelo cliente" | sudo tee /mnt/teste_cliente.txt
 
 No servidor:
 
-Verifique se o arquivo criado no cliente está visível no servidor:
+* Verifique se o arquivo criado no cliente está visível no servidor:
 
-    ls /home/storage
+      ls /home/storage
 
 O arquivo teste_cliente.txt deverá aparecer.
 
