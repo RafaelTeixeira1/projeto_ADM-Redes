@@ -1,0 +1,91 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/bionic64"  # Box Ubuntu 18.04
+  
+  # Configuração de rede privada
+  config.vm.network "private_network", type: "dhcp"
+
+  # Definindo provedor VirtualBox
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "1024"  # 1 GB de memória
+    vb.cpus = 2         # 2 CPUs
+  end
+
+  # Provisionamento para instalar e configurar os serviços
+  config.vm.provision "shell", inline: <<-SHELL
+    # Atualizar o sistema
+    sudo apt update -y && sudo apt upgrade -y
+
+    # Instalar pacotes necessários para DHCP, DNS, FTP, e NFS
+    sudo apt-get install -y isc-dhcp-server bind9 proftpd nfs-common nfs-kernel-server
+
+    # 1. Configuração do Servidor DHCP
+    echo "ddns-update-style none;
+    subnet 192.168.10.0 netmask 255.255.255.0 {
+      range 192.168.10.10 192.168.10.200;
+      option subnet-mask 255.255.255.0;
+      option domain-name \"flamengo.com.br";
+      option domain-name-servers 8.8.8.8, 8.8.4.4;
+      option routers 192.168.10.254;
+      default-lease-time 600;
+      max-lease-time 7200;
+    }" | sudo tee /etc/dhcp/dhcpd.conf > /dev/null
+
+    # Reiniciar o servidor DHCP
+    sudo service isc-dhcp-server restart
+
+    # Configuração da interface de rede
+    sudo sed -i 's/INTERFACE=""$/INTERFACE="eth0"/' /etc/default/isc-dhcp-server
+
+    # 2. Configuração do Servidor DNS (BIND9)
+    echo "zone \"roitier.com.br\" {
+      type master;
+      file \"/etc/bind/db.zonaRoitier\";
+    };
+    zone \"20.in-addr.arpa\" {
+      type master;
+      file \"/etc/bind/db.20reverso\";
+    };" | sudo tee -a /etc/bind/named.conf.local > /dev/null
+
+    # Criar arquivo de zona para o DNS
+    sudo cp /etc/bind/db.local /etc/bind/db.zonaRoitier
+    sudo sed -i 's/localhost/roitier.com.br/g' /etc/bind/db.zonaRoitier
+    sudo cp /etc/bind/db.local /etc/bind/db.20reverso
+    sudo sed -i 's/localhost/20.in-addr.arpa/g' /etc/bind/db.20reverso
+
+    # Reiniciar o BIND9
+    sudo service bind9 restart
+
+    # 3. Configuração do Servidor FTP (ProFTPD)
+    sudo sed -i 's/#UseIPv6/UseIPv6 of/' /etc/proftpd/proftpd.conf
+    sudo sed -i 's/#ServerName/ServerName "Nome do servidor"/' /etc/proftpd/proftpd.conf
+    sudo sed -i 's/#DefaultRoot/DefaultRoot ~/' /etc/proftpd/proftpd.conf
+    sudo sed -i 's/#RequiredValidShell/RequiredValidShell ~/' /etc/proftpd/proftpd.conf
+
+    # Criar usuário webmaster para o FTP
+    sudo useradd webmaster -d /diretorio -s /bin/false
+    sudo chown webmaster:webmaster -R /diretorio
+
+    # Reiniciar o ProFTPD
+    sudo service proftpd restart
+
+    # 4. Configuração do Servidor NFS
+    # Editar o arquivo /etc/default/nfs-common
+    sudo sed -i 's/#NEED_STATD="no"/NEED_STATD="yes"/' /etc/default/nfs-common
+    sudo sed -i 's/#NEED_IDMAPD="no"/NEED_IDMAPD="yes"/' /etc/default/nfs-common
+    sudo sed -i 's/#NEED_GSSD="no"/NEED_GSSD="yes"/' /etc/default/nfs-common
+
+    # Criar o diretório NFS
+    sudo mkdir -p /home/storage
+
+    # Configurar /etc/exports para compartilhar o diretório
+    echo "/home/storage 192.168.0.100(rw,sync,no_subtree_check)" | sudo tee -a /etc/exports > /dev/null
+
+    # Exportar as configurações
+    sudo exportfs -r
+
+    # Reiniciar os serviços NFS
+    sudo service nfs-common restart
+    sudo service nfs-kernel-server restart
+  SHELL
+end
+
