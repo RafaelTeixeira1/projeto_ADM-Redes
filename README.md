@@ -36,8 +36,8 @@ Recomendação: Utilize a versão 6.1 do VirtualBox para melhor compatibilidade.
 
 Certifique-se de que os programas estão funcionando corretamente com os seguintes comandos:
 
-```vagrant --version
-vboxmanage --version```
+    vagrant --version
+    vboxmanage --version
 
 ### Configurando o Ambiente:
 
@@ -53,7 +53,7 @@ Crie um novo diretório para o projeto:
 
 No terminal, execute o seguinte comando para iniciar e configurar a máquina virtual automaticamente:
 
-`vagrant up`
+    vagrant up
 
 Após esse comando, a máquina será configurada com todos os serviços necessários de forma automática. Não será necessário rodar comandos manuais dentro da VM.
 
@@ -65,45 +65,45 @@ Depois de inicializar a máquina, siga os passos abaixo para testar o funcioname
 
 No cliente:
 
-    Verifique se o IP foi atribuído automaticamente:
+Verifique se o IP foi atribuído automaticamente:
 
     ip addr show
 
-    O cliente deverá receber um IP na faixa 192.168.X.10-192.168.X.200.
+O cliente deverá receber um IP na faixa 192.168.X.10-192.168.X.200.
 
 ### Serviço DNS (BIND9)
 
 No cliente:
 
-    Verifique se a resolução de nomes configurada no servidor DNS está funcionando:
+Verifique se a resolução de nomes configurada no servidor DNS está funcionando:
 
     dig roitier.com.br
 
-    O nome roitier.com.br deve ser resolvido corretamente.
+O nome roitier.com.br deve ser resolvido corretamente.
 
 ### Serviço FTP
 
 No cliente:
 
-    Acesse o servidor FTP e liste os arquivos disponíveis:
+Acesse o servidor FTP e liste os arquivos disponíveis:
 
     ftp 192.168.X.1
 
-    Use o login anonymous. O arquivo README.txt deve estar visível no diretório compartilhado.
+Use o login anonymous. O arquivo README.txt deve estar visível no diretório compartilhado.
 
 ### Serviço NFS
 
 No servidor:
 
-    Verifique se o serviço NFS está ativo:
+ Verifique se o serviço NFS está ativo:
 
     systemctl status nfs-kernel-server
 
 No cliente:
 
-    Monte o diretório compartilhado pelo servidor NFS:
+Monte o diretório compartilhado pelo servidor NFS:
 
-sudo mount 192.168.X.1:/home/storage /mnt
+    sudo mount 192.168.X.1:/home/storage /mnt
 
 Crie um arquivo no diretório compartilhado:
 
@@ -111,19 +111,19 @@ Crie um arquivo no diretório compartilhado:
 
 No servidor:
 
-    Verifique se o arquivo criado no cliente está visível no servidor:
+Verifique se o arquivo criado no cliente está visível no servidor:
 
     ls /home/storage
 
-    O arquivo teste_cliente.txt deverá aparecer.
+O arquivo teste_cliente.txt deverá aparecer.
 
 ## Referências e Documentação
 
-    Documentação do Vagrant
-    Documentação do ISC-DHCP-Server
-    Documentação do BIND9
-    Documentação do ProFTPD
-    Documentação do NFS
+[Documentação do Vagrant](https://developer.hashicorp.com/vagrant/docs)
+[Documentação do ISC-DHCP-Server](https://manpages.ubuntu.com/manpages/bionic/en/man8/dhcpd.8.html)
+[Documentação do BIND9](https://bind9.readthedocs.io/en/latest/)
+[Documentação do ProFTPD](http://www.proftpd.org/docs/)
+[Documentação do NFS](https://wiki.linux-nfs.org/wiki/index.php/Main_Page)
 
 ## Conclusão
 
