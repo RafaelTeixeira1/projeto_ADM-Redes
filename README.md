@@ -45,7 +45,7 @@ Neste documento, você encontrará instruções detalhadas sobre o ambiente, com
 * Crie um novo diretório para o projeto:
 
       mkdir vagrant_services
-      cd vagrant_servoces
+      cd vagrant_services
 
  Substitua o arquivo Vagrantfile:
         Coloque o arquivo Vagrantfile que você recebeu neste diretório.
